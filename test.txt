@@ -1,4 +1,0 @@
-This is a test.
-
-Professor added stuff (after student did in fork).
-Student added stuff here.
