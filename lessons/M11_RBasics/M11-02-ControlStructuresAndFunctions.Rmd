@@ -12,6 +12,67 @@ editor_options:
 -   Date: 5 July 2022
 -   Author: R.C. Alvarado (adapted)
 
+# `if`/`else` Statements
+
+You've seen this in Python.
+
+They work the same way in both languages.
+
+Here's their syntax in R.
+
+    if(<condition>) {
+            ## do something
+    } 
+
+    if(<condition>) {
+            ## do something
+    } 
+    else {
+            ## do something else
+    }
+
+    if(<condition1>) {
+            ## do something
+    } else if(<condition2>)  {
+            ## do something different
+    } else {
+            ## do something different
+    }
+
+Generate a uniform random number:
+
+```{r}
+x <- runif(1, 0, 10) # The Uniform Distribution
+
+if(x > 3) {
+  y <- 10
+} else {
+  y <- 0
+}
+```
+
+You assign an `if` statement to a variable.
+
+```{r}
+y <- if(x > 3) {
+  10
+} else { 
+  0
+}
+
+y
+```
+
+You can stack `if` blocks, too.
+
+    if(<condition1>) {
+
+    }
+
+    if(<condition2>) {
+
+    }
+
 # Control Structures
 
 ## `for` Loops
@@ -43,9 +104,13 @@ for(i in 1:4) {
 
 ## `seq_along()`
 
-The seq_along() function is commonly used in conjunction with for loops
-in order to generate an integer sequence based on the length of an
+The `seq_along()` function is commonly used in conjunction with for
+loops in order to generate an integer sequence based on the length of an
 object (in this case, the object x).
+
+```{r}
+x
+```
 
 ```{r}
 ## Generate a sequence based on length of 'x'
@@ -269,34 +334,3 @@ environment** for it.
 For more on scoping rules, see [Chapter 15: Scoping Rules of
 R](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
 in Peng's *R Programming For Data Science*.
-
-# Plot
-
-R is know for its high-quality visualizations, and we'll explore at
-these in more detail when we look at GGPlot.
-
-For now, consider the `plot()` function.
-
-Let's plot the data from the built in dataframe `airquality`.
-
-```{r}
-airquality
-```
-
-```{r}
-plot(airquality)
-```
-
-```{r}
-
-plot(airquality[, c("Temp", "Wind")])
-
-```
-
-```{r}
-plot(airquality$Temp)
-```
-
-```{r}
-?plot
-```

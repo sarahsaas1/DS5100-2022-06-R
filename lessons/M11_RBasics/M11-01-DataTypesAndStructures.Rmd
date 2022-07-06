@@ -33,11 +33,20 @@ library(tm)
 Note that the library name is quoted in when installing, but not when
 using `library`.
 
+## R's Design
+
+-   Designed to support statistical computing
+-   Very strong community
+-   Many domain-specific functions are built in
+-   Vector first thinking
+-   Everything is an object
+
 ## R Syntax
 
--   **Braces** `{` and `}` are used to form blocks.
--   **Semi-colons** are used optionally to end statements, required if
-    on same line.
+-   Syntax loosely follows traditonal `C`-style
+    -   **Braces** `{` and `}` are used to form blocks.
+    -   **Semi-colons** are used optionally to end statements, required
+        if on same line.
 -   **Assignments** are made with `<-` or `->`
 -   **Dots** `.` have no special meaning -- they are not operators.
 -   Single and double **quotes** have the same meaning, but double
@@ -54,13 +63,9 @@ using `library`.
 There are several basic R data types.
 
 -   Numeric
-
 -   Integer
-
 -   Complex
-
 -   Logical
-
 -   Character
 
 ## Numeric
@@ -145,7 +150,19 @@ as.integer(TRUE)    # the numeric value of TRUE
 as.integer(FALSE)   # the numeric value of FALSE 
 ```
 
-# Logical (Boolean)
+### Math Operators
+
+| **Operator**   | **Description**             |
+|----------------|-----------------------------|
+| **+**          | addition                    |
+| **-**          | subtraction                 |
+| **\***         | multiplication              |
+| **/**          | division                    |
+| **\^ or \*\*** | exponentiation              |
+| **x %% y**     | modulus (x mod y) 5%%2 is 1 |
+| **x %/% y**    | integer division 5%/%2 is 2 |
+
+## Logical (Boolean)
 
 A logical value is often created via comparison between variables.
 
@@ -160,7 +177,7 @@ z              # print the logical value
 class(z)       # print the class name of z 
 ```
 
-### Operators
+### Logical Operators
 
 Standard logical operations are `&` (and), `|` (or), and `!` (negation).
 
@@ -186,7 +203,7 @@ b <- F
 a & b
 ```
 
-# Characters
+## Characters
 
 A character object is used to represent string values in R.
 
@@ -247,7 +264,7 @@ And to replace the first occurrence of the word "little" by another word
 sub("little", "big", "Mary has a little lamb.") 
 ```
 
-# Data Structures
+# R Data Structures
 
 Basic R comes with several data structures:
 
@@ -845,6 +862,12 @@ And here is the gas mileage data for automatic transmission
 mtcars[L,]$mpg 
 ```
 
+#### Change the name of a column
+
+```{r}
+names(df)[names(df) == 'old.var.name'] <- 'new.var.name'
+```
+
 ### Importing Data
 
 It is often necessary to import sample textbook data into R before you
@@ -934,7 +957,9 @@ help(read.csv)
 ### Working Directory
 
 Finally, the code samples above assume the data files are located in the
-R working directory, which can be found with the function getwd
+R working directory, which can be found with the function `getwd()`.
+
+Note that these things can also be set using the RStudio's GUI.
 
 ```{r}
 getwd()               # get current working directory
@@ -952,4 +977,59 @@ Windows platform
 
 ```{r}
 setwd("C:/MyDoc")
+```
+
+# Extra
+
+## Plots with `plot()`
+
+R is know for its high-quality visualizations, and we'll explore at
+these in more detail when we look at GGPlot.
+
+For now, consider the `plot()` function.
+
+Let's plot the data from the built in data frame `airquality`.
+
+```{r}
+airquality
+```
+
+```{r}
+plot(airquality)
+```
+
+```{r}
+
+plot(airquality[, c("Temp", "Wind")])
+
+```
+
+```{r}
+plot(airquality$Temp, type='l')
+```
+
+```{r}
+?plot
+```
+
+## Value Counts with `table()`
+
+This function is like `.value_counts()` in Pandas. It does a quick count
+of all the value types of a feature or combination of them.
+
+Here we get a table of values and their counts for `airquality$Temp`,
+convert this into a data frame, and then plot the results.
+
+```{r}
+temps = table(airquality$Temp)
+temps
+```
+
+```{r}
+temps.df = data.frame(temps)
+temps.df
+```
+
+```{r}
+plot(temps.df, xlab="Temp", type="b")
 ```
